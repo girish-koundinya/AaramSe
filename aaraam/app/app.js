@@ -7,7 +7,11 @@
       }
     },
     submitClicked: function(e) {
-      
+      var retVal = confirm("Do you want to continue ?");
+      if(!retVal){
+        e.preventDefault();
+        e.stopPropagation();        
+      }
     }
   };
 })();
