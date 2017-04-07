@@ -7,6 +7,11 @@
       }
     },
     submitClicked: function(e) {
+
+      //TODO : fetch content of note/reply/forward 
+      //TODO : make network request 
+      //TODO : get score and check rating 
+
       var retVal = confirm("Do you want to continue ?");
       if(!retVal){
         e.preventDefault();
