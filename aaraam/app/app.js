@@ -7,12 +7,11 @@
       }
     },
     submitClicked: function(e) {
-      //TODO : fetch content of note/reply/forward 
-      //TODO : make network request 
       //TODO : get score and check rating
       e.preventDefault();
       e.stopPropagation();
-      var options = {}; 
+      var textContent = jQuery('.redactor_editor').text();
+      var options = { text : textContent}; 
       this.$request.invoke('getSentitmentScore', options)
       .done (function(data){
         console.log(data);
