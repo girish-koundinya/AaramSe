@@ -9,21 +9,23 @@
     submitClicked: function(e) {
       //TODO : fetch content of note/reply/forward 
       //TODO : make network request 
-      //TODO : get score and check rating 
-      var rating;
-      this.$request.invoke('getSentitmentScore', 'param')
+      //TODO : get score and check rating
+      e.preventDefault();
+      e.stopPropagation();
+      var options = {}; 
+      this.$request.invoke('getSentitmentScore', options)
       .done (function(data){
+        console.log(data);
         var retVal = confirm("Do you want to continue ?");
         if(retVal > 0){
-          e.preventDefault();
-          e.stopPropagation();        
+
         }
       })
       .fail (function(err){
         console.log(err)
-          //Log error
       });
     }
+
   };
 })();
 
