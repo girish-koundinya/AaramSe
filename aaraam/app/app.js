@@ -4,6 +4,7 @@
     initialize: function() {
       if(page_type == "ticket") {
         domHelper.ticket.onSubmitClick(this.submitClicked.bind(this), ['reply','forward','note']);
+        this.getTicketSentiment();
       }
     },
     submitClicked: function(e) {
@@ -16,7 +17,7 @@
       .done (function(data){
         if(data.message.documentSentiment.score < 0){
           console.log("bad response");
-          var retVal = confirm("That sounds a bit rude, do you want to continue ?");
+          var retVal = confirm("That sounds a bit rude, do you want to continue?");
           if(retVal > 0){
             console.log("bad response - continue anyway");
             e.currentTarget.submit();
@@ -29,6 +30,17 @@
       .fail (function(err){
         console.log(err);
         e.currentTarget.submit();
+      });
+    },
+    getTicketSentiment: function(e){
+      var textContent = domHelper.ticket.getTicketInfo().helpdesk_ticket.description;
+      var options = { text : textContent}; 
+      this.$request.invoke('getSentitmentScore',options)
+      .done(function(data){
+       console.log(data.message.documentSentiment.score); 
+      })
+      .fail(function(err){
+       console.log(err); 
       });
     }
   };
