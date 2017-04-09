@@ -2,5 +2,6 @@ dist
 work
 build
 .frsh
+.DS_Store
 node_modules/
 config/iparam_test_data.yml 
