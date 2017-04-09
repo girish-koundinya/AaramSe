@@ -37,7 +37,14 @@
       var options = { text : textContent}; 
       this.$request.invoke('getSentitmentScore',options)
       .done(function(data){
-       console.log(data.message.documentSentiment.score); 
+        console.log(data.message.documentSentiment.score);
+       if(data.message.documentSentiment.score < 0){
+        jQuery('#avg-cust-senti').attr("class","sentisad");
+       }else if(data.message.documentSentiment.score < 0.5){
+        jQuery('#avg-cust-senti').attr("class","sentineutral");        
+       }else{
+        jQuery('#avg-cust-senti').attr("class","sentihappy");                
+       }
       })
       .fail(function(err){
        console.log(err); 
