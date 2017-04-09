@@ -33,8 +33,14 @@
       });
     },
     getTicketSentiment: function(e){
-      var textContent = domHelper.ticket.getTicketInfo().helpdesk_ticket.description;
-      var options = { text : textContent}; 
+      var avgText = '';
+      var textContent = domHelper.ticket.getTicketInfo().helpdesk_ticket.description; 
+      avgText = textContent;
+      var comment = jQuery('.commentbox-requester');      var options = { text : textContent}; 
+      jQuery.each( comment, function( i, val ) {
+        avgText = avgText + ' ' + jQuery(val).text().trim();
+      });
+      var options = { text : avgText}; 
       this.$request.invoke('getSentitmentScore',options)
       .done(function(data){
         console.log(data.message.documentSentiment.score);
