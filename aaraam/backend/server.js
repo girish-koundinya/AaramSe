@@ -1,16 +1,15 @@
 var request = loadDependency('request');
-//var requestData = loadLib('req-data');
 
 exports = {
   getSentitmentScore: function(args) {
 
     var reqData = {
       method: 'POST',
-      url: 'https://language.googleapis.com/v1beta1/documents:analyzeSentiment?key=xxx',
+      url: 'https://language.googleapis.com/v1beta1/documents:analyzeSentiment?key=' + args.iparams.api_key,
       body: {
         document: {
           type: 'PLAIN_TEXT',
-          content: 'This tastes really bad.' || args.note_data
+          content: args.text
         }
       },
       json: true,
@@ -20,7 +19,6 @@ exports = {
     };
 
     request(reqData, function(err, resp, body) {
-      console.log(resp);
       console.log(body);
 
       if (err) { return renderData(err); }
