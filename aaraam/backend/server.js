@@ -6,7 +6,7 @@ exports = {
     var reqData = {
       method: 'POST',
       url: 'https://language.googleapis.com/v1beta1/documents:analyzeSentiment?key=' + args.iparams.api_key,
-      body: {
+     body: {
         document: {
           type: 'PLAIN_TEXT',
           content: args.text
@@ -19,8 +19,6 @@ exports = {
     };
 
     request(reqData, function(err, resp, body) {
-      console.log(body);
-
       if (err) { return renderData(err); }
       if (resp.statusCode == 201) {
         return renderData(null, body);

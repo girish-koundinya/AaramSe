@@ -7,26 +7,33 @@
       }
     },
     submitClicked: function(e) {
-      //TODO : get score and check rating
       e.preventDefault();
       e.stopPropagation();
       var textContent = jQuery('.redactor_editor').text();
       var options = { text : textContent}; 
       this.$request.invoke('getSentitmentScore', options)
       .done (function(data){
-        console.log(data);
-        var retVal = confirm("Do you want to continue ?");
-        if(retVal > 0){
-
+        if(data.message.documentSentiment.score < 0){
+          console.log("bad response");
+          var retVal = confirm("Do you want to continue ?");
+          if(retVal > 0){
+            console.log("bad response - continue anyway");
+            e.currentTarget.submit();
+          }
+        }else{
+          console.log("good response");
+          e.currentTarget.submit();
         }
       })
       .fail (function(err){
         console.log(err);
+        e.currentTarget.submit();
       });
     }
-
   };
 })();
+
+
 
 /*
 {%comment%}
