@@ -1,1 +1,0 @@
-Putting a dummy file here as this directory (backend/lib) is required, but cannot exist as an empty folder on git.
